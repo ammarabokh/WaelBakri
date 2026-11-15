@@ -27,13 +27,18 @@ node dev-server.js
 
 ### على GitHub Pages (مؤقتاً)
 
-1. في المستودع على GitHub: **Settings ← Pages ← Build and deployment ← Source** واختر **GitHub Actions** (مرة واحدة فقط).
-2. كل رفع إلى الفرع `main` ينشر محتوى مجلد `site/` تلقائياً عبر `.github/workflows/pages.yml`. لإعادة النشر يدوياً: تبويب **Actions** ← «نشر الموقع على GitHub Pages» ← **Run workflow**.
-3. الرابط: `https://ammarabokh.github.io/WaelBakri/`
+الرابط: `https://ammarabokh.github.io/WaelBakri/`
+
+يعمل بأي من إعدادَي Pages:
+
+- **Deploy from a branch** (الإعداد الحالي): يُنشر المستودع كله، و`index.html` في الجذر يحوّل الزائر إلى `site/`. الرابط النهائي يصبح `.../WaelBakri/site/`.
+- **GitHub Actions** (الأنظف): من **Settings ← Pages ← Source** اختر **GitHub Actions**. عندها ينشر `.github/workflows/pages.yml` محتوى `site/` مباشرة عند كل رفع إلى `main`، ويعمل الموقع على `.../WaelBakri/` بلا تحويل.
 
 ### على استضافة عادية
 
-ارفع **محتوى** مجلد `site/` (وليس المجلد نفسه) إلى المجلد العام في الاستضافة، مثل `public_html`، بحيث يكون `index.html` في الجذر. لا يحتاج الموقع PHP ولا قاعدة بيانات.
+الأفضل: ارفع **محتوى** مجلد `site/` (وليس المجلد نفسه) إلى المجلد العام في الاستضافة، مثل `public_html`، بحيث يكون `index.html` في الجذر. لا يحتاج الموقع PHP ولا قاعدة بيانات.
+
+إن رفعتَ المستودع كاملاً، فصفحة التحويل في الجذر تفتح `site/` تلقائياً، لكن مجلدي `docs/` و`source-images/` سيكونان متاحين للزوار أيضاً.
 
 ## تنويه عن الصور
 
