@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>وائل البكري للتدفئة المركزية | مضخات حرارية وتدفئة أرضية في حلب وإدلب</title>
+<meta name="description" content="شركة وائل البكري للتدفئة المركزية: مضخات حرارية، تدفئة أرضية، وراديترات في حلب وإدلب. دراسة وتأسيس وتوريد وتركيب وتشغيل وصيانة.">
+<meta name="theme-color" content="#060f1d">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap">
+<link rel="preload" as="image" href="assets/images/scenes/villa-1280.webp" type="image/webp">
+<link rel="stylesheet" href="css/style.css">
+<noscript><style>.scene .cold,.scene canvas,.hint{display:none}.hero,.journey{height:100svh}.s1,.j1{opacity:0}.s3,.j3{opacity:1}.pipes path{opacity:1;stroke-dashoffset:0}.glow rect,.glow circle,.mark{opacity:1}.floor{display:none}.rail{height:auto}.rail .stage{position:relative;height:auto}.rail .track-wrap{overflow-x:auto;height:560px}</style></noscript>
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="#hero"><b>وائل البكري</b><span>للتدفئة المركزية</span></a>
+  <nav class="nav" aria-label="القائمة الرئيسية">
+    <a href="#heat-pump">المضخات الحرارية</a>
+    <a href="#products">المنتجات</a>
+    <a href="#floor">التدفئة الأرضية</a>
+    <a href="#spaces">أعمالنا</a>
+    <a href="#contact">تواصل</a>
+  </nav>
+  <a class="top-tel" href="tel:+963951728468">0951 728 468</a>
+</header>
+
+<main>
+
+<!-- 1. الغلاف: الكاميرا الحرارية -->
+<section class="hero" id="hero" aria-label="الغلاف">
+  <div class="stage">
+    <div class="scene" aria-hidden="true">
+      <img id="villa" src="assets/images/scenes/villa-1280.webp" srcset="assets/images/scenes/villa-800.webp 800w, assets/images/scenes/villa-1280.webp 1280w" sizes="100vw" width="1280" height="720" alt="" decoding="async" fetchpriority="high">
+      <img class="cold" src="assets/images/scenes/villa-1280.webp" srcset="assets/images/scenes/villa-800.webp 800w, assets/images/scenes/villa-1280.webp 1280w" sizes="100vw" width="1280" height="720" alt="">
+      <canvas id="thermal" width="640" height="360"></canvas>
+    </div>
+    <div class="shade"></div>
+
+    <div class="copy">
+      <div class="s1">
+        <span class="eyebrow">مضخات حرارية · حلب وإدلب</span>
+        <h1 class="h">بيتك بارد هذا الشتاء؟</h1>
+        <p class="sub">هكذا يبدو البيت قبل التدفئة. مرّر للأسفل وشاهد الدفء يصل.</p>
+      </div>
+      <div class="s2" aria-hidden="true">
+        <span class="eyebrow">من المضخة الحرارية إلى كل غرفة</span>
+        <p class="h">الدفء يصل غرفة بعد غرفة</p>
+        <p class="sub">دراسة وتأسيس وتوريد وتركيب وتشغيل وصيانة.</p>
+      </div>
+      <div class="s3" aria-hidden="true">
+        <span class="eyebrow">شركة وائل البكري للتدفئة المركزية</span>
+        <p class="h">شتاء دافئ في كل البيت</p>
+        <p class="sub">مضخات حرارية، تدفئة أرضية، وراديترات في حلب وإدلب.</p>
+      </div>
+    </div>
+
+    <div class="foot">
+      <div class="cta">
+        <a class="btn gold" href="https://wa.me/963951728468">راسلنا على واتساب</a>
+        <a class="btn line" href="tel:+963951728468">اتصل <span>0951 728 468</span></a>
+      </div>
+      <div class="gauge" aria-hidden="true">
+        <div class="gauge-top"><span class="gauge-label">حرارة البيت</span><span class="gauge-val" id="temp">4°</span></div>
+        <div class="gauge-bar"><i id="bar"></i></div>
+      </div>
+    </div>
+
+    <div class="hint" id="hint" aria-hidden="true">مرّر للأسفل<i></i></div>
+  </div>
+</section>
+
+<!-- 2. رحلة الحرارة -->
+<section class="journey" id="heat-pump" aria-label="رحلة الحرارة">
+  <div class="stage">
+    <div class="scene" aria-hidden="true">
+      <img src="assets/images/scenes/villa-1280.webp" srcset="assets/images/scenes/villa-800.webp 800w, assets/images/scenes/villa-1280.webp 1280w" sizes="100vw" width="1280" height="720" alt="" loading="lazy" decoding="async">
+      <div class="dim" id="jdim"></div>
+      <svg viewBox="0 0 1280 720" preserveAspectRatio="none">
+        <g class="glow">
+          <circle data-a=".03" data-b=".10" cx="1188" cy="566" r="23"/>
+          <rect data-a=".28" data-b=".36" x="996" y="458" width="35" height="100" rx="14"/>
+          <rect data-a=".60" data-b=".68" x="309" y="522" width="32" height="28" rx="3"/>
+          <rect data-a=".62" data-b=".70" x="359" y="522" width="40" height="28" rx="3"/>
+          <rect data-a=".70" data-b=".78" x="500" y="383" width="39" height="25" rx="3"/>
+          <rect data-a=".71" data-b=".79" x="467" y="383" width="26" height="25" rx="3"/>
+          <rect data-a=".73" data-b=".81" x="359" y="383" width="41" height="25" rx="3"/>
+          <rect data-a=".76" data-b=".84" x="202" y="321" width="13" height="63" rx="3"/>
+        </g>
+        <g class="pipes">
+          <path pathLength="1" data-a=".10" data-b=".30" d="M1140,560 H1086 L1052,548 V450 H1013 V460"/>
+          <path pathLength="1" data-a=".36" data-b=".56" d="M1000,549 H925 V595 H152"/>
+          <path pathLength="1" data-a=".46" data-b=".54" d="M593,595 V421"/>
+          <path pathLength="1" data-a=".54" data-b=".68" d="M593,421 H180"/>
+          <path pathLength="1" data-a=".54" data-b=".64" d="M593,421 H880"/>
+          <path class="thin" pathLength="1" data-a=".46" data-b=".72" d="M612,595 V589 H884 V581 H612 V573 H884 V565 H612"/>
+          <path class="thin" pathLength="1" data-a=".56" data-b=".60" d="M379,595 V550"/>
+          <path class="thin" pathLength="1" data-a=".58" data-b=".62" d="M325,595 V550"/>
+          <path class="thin" pathLength="1" data-a=".66" data-b=".70" d="M520,421 V408"/>
+          <path class="thin" pathLength="1" data-a=".67" data-b=".71" d="M480,421 V408"/>
+          <path class="thin" pathLength="1" data-a=".69" data-b=".73" d="M380,421 V408"/>
+          <path class="thin" pathLength="1" data-a=".72" data-b=".76" d="M209,421 V384"/>
+          <path class="thin" pathLength="1" data-a=".60" data-b=".64" d="M646,421 V408"/>
+          <path class="thin" pathLength="1" data-a=".64" data-b=".76" d="M626,408 H666 V386 H626 Z M634,408 V386 M642,408 V386 M650,408 V386 M658,408 V386"/>
+        </g>
+        <g class="mark" data-a=".03" data-b=".10" data-x="1174" data-y="508"><circle r="13"/><text>1</text></g>
+        <g class="mark" data-a=".28" data-b=".36" data-x="968" data-y="500"><circle r="13"/><text>2</text></g>
+        <g class="mark" data-a=".50" data-b=".58" data-x="593" data-y="500"><circle r="13"/><text>3</text></g>
+      </svg>
+    </div>
+    <div class="shade"></div>
+
+    <div class="copy">
+      <div class="j1">
+        <span class="eyebrow">المضخات الحرارية · 1 من 3</span>
+        <h2 class="h">الحرارة تبدأ من الخارج</h2>
+        <p class="sub">الوحدة الخارجية هي قلب النظام.</p>
+      </div>
+      <div class="j2" aria-hidden="true">
+        <span class="eyebrow">المضخات الحرارية · 2 من 3</span>
+        <p class="h">ثم تصل إلى الخزان</p>
+        <p class="sub">ماء ساخن جاهز للتوزيع على البيت.</p>
+      </div>
+      <div class="j3" aria-hidden="true">
+        <span class="eyebrow">المضخات الحرارية · 3 من 3</span>
+        <p class="h">ومنه إلى كل غرفة</p>
+        <p class="sub">راديترات وتدفئة أرضية من نظام واحد.</p>
+      </div>
+    </div>
+
+    <div class="foot">
+      <div class="cta">
+        <a class="btn line" href="https://wa.me/963951728468">اسأل عن المضخة المناسبة لبيتك</a>
+      </div>
+      <div class="steps" aria-hidden="true"><span id="st1" class="on">الوحدة الخارجية</span><span id="st2">الخزان</span><span id="st3">الغرف</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- فاصل: معرض المنتجات -->
+<section class="rail" id="products" aria-label="المنتجات والقطع" tabindex="-1">
+  <div class="stage">
+    <div class="rail-head">
+      <div class="rail-title">
+        <span class="eyebrow">ما نوفّره ونركّبه</span>
+        <h2 class="h">من المضخة إلى آخر وصلة</h2>
+        <p class="sub">كل ما يحتاجه نظام التدفئة، نورّده ونركّبه ونشغّله.</p>
+      </div>
+      <div class="rail-ctrl">
+        <button class="arrow" type="button" data-dir="prev" aria-label="السابق">&#8594;</button>
+        <span class="count" aria-live="polite"><b>01</b> / 10</span>
+        <button class="arrow" type="button" data-dir="next" aria-label="التالي">&#8592;</button>
+      </div>
+    </div>
+    <div class="track-wrap">
+      <div class="track">
+        <article class="card"><img src="assets/images/products/heatpump-13kw.webp" alt="وحدة مضخة حرارية هواء-ماء بمروحة واحدة" loading="lazy"><span class="tag real">صورة المنتج</span><div class="card-text"><span class="num">01</span><h3>مضخات حرارية هواء-ماء</h3><p>للشقق والفلل الصغيرة.</p></div></article>
+        <article class="card"><img src="assets/images/products/heatpump-16kw.webp" alt="وحدة مضخة حرارية هواء-ماء بمروحتين" loading="lazy"><span class="tag real">صورة المنتج</span><div class="card-text"><span class="num">02</span><h3>مضخات حرارية بقدرات أعلى</h3><p>للفلل الكبيرة والمنشآت.</p></div></article>
+        <article class="card"><img src="assets/images/products/heatpump-ground-source-unit.webp" alt="وحدة مضخة حرارية أرضية داخلية بشاشة تحكم" loading="lazy"><span class="tag real">صورة المنتج</span><div class="card-text"><span class="num">03</span><h3>مضخات حرارية أرضية</h3><p>حرارة الأرض أو مياه البئر.</p></div></article>
+        <article class="card"><img src="assets/images/gallery/burner.webp" alt="" loading="lazy"><span class="tag">صورة توضيحية</span><div class="card-text"><span class="num">04</span><h3>حراقات ومراجل</h3><p>تركيب وصيانة وتبديل.</p></div></article>
+        <article class="card"><img src="assets/images/gallery/boiler.webp" alt="" loading="lazy"><span class="tag">صورة توضيحية</span><div class="card-text"><span class="num">05</span><h3>مراجل جدارية</h3><p>حلول للشقق والمساحات الصغيرة.</p></div></article>
+        <article class="card"><img src="assets/images/gallery/radiator.webp" alt="" loading="lazy"><span class="tag">صورة توضيحية</span><div class="card-text"><span class="num">06</span><h3>راديترات</h3><p>بأشكال ومقاسات تناسب كل غرفة.</p></div></article>
+        <article class="card"><img src="assets/images/gallery/manifold.webp" alt="" loading="lazy"><span class="tag">صورة توضيحية</span><div class="card-text"><span class="num">07</span><h3>مجمّعات التدفئة الأرضية</h3><p>توزيع متوازن لكل دائرة.</p></div></article>
+        <article class="card"><img src="assets/images/gallery/fittings.webp" alt="" loading="lazy"><span class="tag">صورة توضيحية</span><div class="card-text"><span class="num">08</span><h3>توصيلات ومحابس</h3><p>نحاس وبراص وأنابيب PEX.</p></div></article>
+        <article class="card"><img src="assets/images/gallery/boilerroom.webp" alt="" loading="lazy"><span class="tag">صورة توضيحية</span><div class="card-text"><span class="num">09</span><h3>غرف الخزانات والمضخات</h3><p>تأسيس مرتب وسهل الصيانة.</p></div></article>
+        <article class="card"><img src="assets/images/gallery/thermostat.webp" alt="" loading="lazy"><span class="tag">صورة توضيحية</span><div class="card-text"><span class="num">10</span><h3>تحكم ذكي</h3><p>حرارة كل غرفة كما تريدها.</p></div></article>
+      </div>
+    </div>
+    <div class="rail-bar" aria-hidden="true"><i></i></div>
+  </div>
+</section>
+
+<!-- 3. كشف الأرضية -->
+<section class="floor" id="floor" aria-label="التدفئة الأرضية">
+  <div class="stage">
+    <div class="scene" aria-hidden="true">
+      <img id="fvilla" src="assets/images/scenes/villa-1280.webp" srcset="assets/images/scenes/villa-800.webp 800w, assets/images/scenes/villa-1280.webp 1280w" sizes="100vw" width="1280" height="720" alt="" loading="lazy" decoding="async">
+      <div class="fcam" id="fcam">
+        <img src="assets/images/scenes/hall-1280.webp" width="1280" height="720" alt="">
+        <svg id="fsvg" viewBox="0 0 1280 720" preserveAspectRatio="none"></svg>
+      </div>
+    </div>
+    <div class="shade"></div>
+
+    <div class="copy">
+      <div class="f1">
+        <span class="eyebrow">التدفئة الأرضية</span>
+        <h2 class="h">دفء لا تراه</h2>
+        <p class="sub">ندخل الصالة ونقترب من الأرضية.</p>
+      </div>
+      <div class="f2" aria-hidden="true">
+        <span class="eyebrow">التدفئة الأرضية</span>
+        <p class="h">تحت البلاط شبكة أنابيب</p>
+        <p class="sub">ماء دافئ يجري تحت كل بلاطة.</p>
+      </div>
+      <div class="f3" aria-hidden="true">
+        <span class="eyebrow">التدفئة الأرضية</span>
+        <p class="h">ما تحت البلاط</p>
+        <p class="sub">أنابيب فوق عازل حراري، مغطاة بطبقة تسوية.</p>
+      </div>
+    </div>
+
+    <ol class="legend" id="flegend">
+      <li><b>1</b>البلاط أو الرخام</li>
+      <li><b>2</b>طبقة التسوية</li>
+      <li><b>3</b>أنابيب التدفئة</li>
+      <li><b>4</b>العازل الحراري</li>
+      <li><b>5</b>البلاطة الخرسانية</li>
+    </ol>
+
+    <div class="foot">
+      <div class="cta">
+        <a class="btn line" href="https://wa.me/963951728468">اطلب دراسة لتدفئة أرضية</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- معرض المساحات -->
+<section class="rail" id="spaces" aria-label="دفء في كل مساحة" tabindex="-1">
+  <div class="stage">
+    <div class="rail-head">
+      <div class="rail-title">
+        <span class="eyebrow">أين نعمل</span>
+        <h2 class="h">دفء في كل مساحة</h2>
+        <p class="sub">من الشقة الصغيرة إلى الفيلا والمنشأة، نصمم النظام على مقاس المكان.</p>
+      </div>
+      <div class="rail-ctrl">
+        <button class="arrow" type="button" data-dir="prev" aria-label="السابق">&#8594;</button>
+        <span class="count" aria-live="polite"><b>01</b> / 06</span>
+        <button class="arrow" type="button" data-dir="next" aria-label="التالي">&#8592;</button>
+      </div>
+    </div>
+    <div class="track-wrap">
+      <div class="track">
+        <article class="card"><img src="assets/images/gallery/villa_moon.webp" alt="" loading="lazy"><span class="tag">صورة توضيحية</span><div class="card-text"><span class="num">01</span><h3>الفلل</h3><p>نظام متكامل لكل الطوابق.</p></div></article>
+        <article class="card"><img src="assets/images/gallery/livingroom.webp" alt="" loading="lazy"><span class="tag">صورة توضيحية</span><div class="card-text"><span class="num">02</span><h3>الصالات وغرف الجلوس</h3><p>راديترات تحت النوافذ حيث يدخل البرد.</p></div></article>
+        <article class="card"><img src="assets/images/gallery/hall2.webp" alt="" loading="lazy"><span class="tag">صورة توضيحية</span><div class="card-text"><span class="num">03</span><h3>الصالونات الواسعة</h3><p>تدفئة أرضية بلا أجهزة ظاهرة.</p></div></article>
+        <article class="card"><img src="assets/images/gallery/floorinstall.webp" alt="" loading="lazy"><span class="tag">صورة توضيحية</span><div class="card-text"><span class="num">04</span><h3>تأسيس التدفئة الأرضية</h3><p>قبل البلاط: عزل وأنابيب ومجمّعات.</p></div></article>
+        <article class="card"><img src="assets/images/gallery/house_snow.webp" alt="" loading="lazy"><span class="tag">صورة توضيحية</span><div class="card-text"><span class="num">05</span><h3>البيوت المستقلة</h3><p>دراسة الأحمال الحرارية لكل غرفة.</p></div></article>
+        <article class="card"><img src="assets/images/gallery/villa_storm.webp" alt="" loading="lazy"><span class="tag">صورة توضيحية</span><div class="card-text"><span class="num">06</span><h3>المشاريع الكبيرة</h3><p>تنفيذ وتشغيل وصيانة دورية.</p></div></article>
+      </div>
+    </div>
+    <div class="rail-bar" aria-hidden="true"><i></i></div>
+  </div>
+</section>
+
+<!-- طريقة العمل -->
+<section class="band" id="process" aria-label="طريقة العمل">
+  <div class="band-in">
+    <div class="band-head">
+      <span class="eyebrow">كيف نعمل</span>
+      <h2 class="h">أربع خطوات من المعاينة إلى الدفء</h2>
+    </div>
+    <ol class="process">
+      <li><h3>معاينة</h3><p>نزور المكان ونقيس المساحات ونسمع ما تحتاجه.</p></li>
+      <li><h3>دراسة وعرض سعر</h3><p>نحسب الأحمال الحرارية ونقترح النظام المناسب.</p></li>
+      <li><h3>توريد وتركيب</h3><p>تأسيس نظيف وتشغيل وتجربة قبل التسليم.</p></li>
+      <li><h3>صيانة ومتابعة</h3><p>متابعة بعد التركيب وصيانة دورية.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- مناطق الخدمة والتواصل -->
+<section class="band alt" id="contact" aria-label="تواصل">
+  <div class="band-in">
+    <div class="band-head">
+      <span class="eyebrow">مناطق الخدمة</span>
+      <h2 class="h">نعمل في حلب وإدلب وريفها</h2>
+    </div>
+    <div class="areas"><span>حلب</span><span>إدلب</span><span>سرمدا</span><span>الدانا</span></div>
+
+    <div class="contact">
+      <div class="contact-card hot">
+        <h2 class="h">جاهز لشتاء دافئ؟</h2>
+        <p>راسلنا على واتساب بمساحة البيت والمدينة، ونعود إليك بموعد للمعاينة.</p>
+        <div class="cta">
+          <a class="btn dark" href="https://wa.me/963951728468">راسلنا على واتساب</a>
+          <a class="btn dark" href="tel:+963951728468">اتصل الآن</a>
+        </div>
+      </div>
+      <div class="contact-card cool">
+        <dl>
+          <div><dt>الهاتف وواتساب</dt><dd class="ltr">0951 728 468</dd></div>
+          <div><dt>العنوان</dt><dd>حلب، سوريا</dd></div>
+          <div><dt>فيسبوك</dt><dd><a href="https://www.facebook.com/profile.php?id=61576617484414">صفحة الشركة</a></dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="site-foot-in">
+    <p><b>شركة وائل البكري للتدفئة المركزية</b> · مضخات حرارية، تدفئة أرضية، راديترات.</p>
+    <p>نموذج أولي. الصور الموسومة «صورة توضيحية» مولّدة بالذكاء الاصطناعي وليست مشاريع منفذة. صور المضخات من موقع شركة رتم للطاقة وتحتاج إذنهم قبل النشر. مسار الأنابيب وطبقات الأرضية للتوضيح وليست مخططاً هندسياً.</p>
+  </div>
+</footer>
+
+<nav class="dock" aria-label="تواصل سريع">
+  <a href="tel:+963951728468">اتصل</a>
+  <a class="wa" href="https://wa.me/963951728468">واتساب</a>
+</nav>
+
+<script src="js/scroll-utils.js"></script>
+<script src="js/hero.js"></script>
+<script src="js/journey.js"></script>
+<script src="js/floor.js"></script>
+<script src="js/gallery.js"></script>
+</body>
+</html>

@@ -1,0 +1,492 @@
+<title>خطة موقع التدفئة</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Readex+Pro:wght@400;600;700&display=swap">
+<style>
+/* التخطيط: صفحة قراءة عمودية من اليمين إلى اليسار؛ شريط تنقل لاصق ثم ثلاثة أجزاء بترتيب طلب المستخدم (معلومات، قوالب، خطة)، وأقسام الخطة الفرعية تنتهي بمخطط الصفحة الرئيسية. */
+:root{
+  --bg:#f3f6f8; --surface:#ffffff; --surface-2:#e7edf2; --fg:#0f2233; --muted:#51657a;
+  --line:#d3dce4; --line-strong:#a9b9c7;
+  --brand:#12334f; --brand-soft:#dbe7f1;
+  --accent:#c2410c; --on-accent:#ffffff; --accent-soft:#fbe3d4;
+  --good:#17713f; --good-soft:#d9f0e3; --warn:#8a5300; --warn-soft:#f9ebc8;
+  --f-display:"Readex Pro","Cairo","Segoe UI",Tahoma,sans-serif;
+  --f-body:"IBM Plex Sans Arabic","Segoe UI",Tahoma,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b1620; --surface:#12222f; --surface-2:#1a2f40; --fg:#e7eef4; --muted:#9db0c1;
+    --line:#243847; --line-strong:#3b5367;
+    --brand:#8cc2ec; --brand-soft:#163149;
+    --accent:#ff8d52; --on-accent:#1b0d05; --accent-soft:#3a2214;
+    --good:#6fd6a0; --good-soft:#143324; --warn:#f2bd5a; --warn-soft:#38290c;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b1620; --surface:#12222f; --surface-2:#1a2f40; --fg:#e7eef4; --muted:#9db0c1;
+  --line:#243847; --line-strong:#3b5367;
+  --brand:#8cc2ec; --brand-soft:#163149;
+  --accent:#ff8d52; --on-accent:#1b0d05; --accent-soft:#3a2214;
+  --good:#6fd6a0; --good-soft:#143324; --warn:#f2bd5a; --warn-soft:#38290c;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.8 var(--f-body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.35;margin:0;text-wrap:balance;color:var(--brand)}
+p{margin:0}
+.wrap{max-width:1040px;margin-inline:auto}
+
+/* التنقل */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);border-bottom:1px solid var(--line);
+  margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
+.nav-in{max-width:1040px;margin-inline:auto;display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar-width:thin}
+.nav a{white-space:nowrap;text-decoration:none;color:var(--muted);font-size:.9rem;font-weight:500;padding:4px 12px;border-radius:999px}
+.nav a:hover{background:var(--surface-2);color:var(--fg)}
+section[id],div[id]{scroll-margin-top:64px}
+
+/* الرأس */
+.top{padding-block:44px 28px;display:grid;gap:14px}
+.kicker{font-size:.85rem;font-weight:600;color:var(--accent);letter-spacing:.02em}
+h1{font-size:clamp(1.9rem,5vw,3rem);font-weight:700;max-width:22ch}
+.lede{max-width:64ch;color:var(--muted);font-size:1.05rem}
+.stamp{font-size:.85rem;color:var(--muted)}
+
+/* الحالة */
+.status{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-block:8px 12px}
+.st{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:8px;align-content:start}
+.st h3{font-size:1rem}
+.st p{font-size:.92rem;color:var(--muted)}
+.chip{justify-self:start;font-size:.78rem;font-weight:600;padding:2px 10px;border-radius:999px}
+.chip.warn{background:var(--warn-soft);color:var(--warn)}
+.chip.good{background:var(--good-soft);color:var(--good)}
+.chip.brand{background:var(--brand-soft);color:var(--brand)}
+
+/* الأقسام */
+.part{padding-block:44px 8px;display:grid;gap:22px}
+.part-head{display:grid;gap:6px}
+.part-head h2{font-size:clamp(1.5rem,3.5vw,2.1rem)}
+.part-head p{color:var(--muted);max-width:68ch}
+.sub{display:grid;gap:14px}
+.sub>h3{font-size:1.15rem}
+.sub>p{max-width:68ch}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;gap:10px;align-content:start;min-width:0}
+.card h4{font-size:1.02rem}
+.card ul,.card ol{margin:0;padding-inline-start:1.3rem;display:grid;gap:6px}
+.card li{padding-inline-start:2px}
+.soft{background:var(--accent-soft);border-radius:12px;padding:18px 20px;display:grid;gap:6px}
+.soft h4{color:var(--fg);font-size:1rem}
+.soft p{font-size:.95rem}
+
+/* القوالب */
+.tpls{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+.tpl{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:10px;align-content:start;min-width:0}
+.tpl-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.tpl h4{font-size:1.1rem}
+.tag{font-size:.76rem;font-weight:600;padding:2px 10px;border-radius:999px;background:var(--surface-2);color:var(--muted)}
+.tpl p{font-size:.93rem}
+.tpl .lbl{font-weight:600;color:var(--fg)}
+.tpl .caveat{color:var(--muted)}
+.tpl .links{display:flex;gap:14px;flex-wrap:wrap;font-size:.92rem;font-weight:500;margin-top:2px}
+.linklist{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.linklist li{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;display:grid;gap:2px}
+.linklist a{font-weight:600}
+.linklist span{font-size:.9rem;color:var(--muted)}
+
+/* الاتجاه البصري */
+.swatches{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.sw{border-radius:12px;border:1px solid var(--line);overflow:hidden;background:var(--surface)}
+.sw i{display:block;height:64px}
+.sw div{padding:10px 12px;display:grid;gap:0}
+.sw b{font-size:.92rem}
+.sw small{color:var(--muted);font-size:.8rem;line-height:1.5}
+.type-demo{display:grid;gap:4px}
+.type-demo .d{font:700 1.7rem/1.4 var(--f-display);color:var(--brand)}
+.type-demo .b{color:var(--muted);font-size:.95rem}
+
+/* خريطة الموقع */
+.pages{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.pg{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:4px;align-content:start}
+.pg b{font-family:var(--f-display);color:var(--brand);font-size:.98rem}
+.pg span{font-size:.88rem;color:var(--muted)}
+.pg em{justify-self:start;font-style:normal;font-size:.74rem;font-weight:600;padding:1px 9px;border-radius:999px;background:var(--brand-soft);color:var(--brand)}
+.pg em.opt{background:var(--surface-2);color:var(--muted)}
+
+/* مخطط الصفحة الرئيسية */
+.wf{display:grid;gap:14px}
+.wf-row{display:grid;grid-template-columns:11.5rem minmax(0,1fr);gap:18px;align-items:start}
+.wf-meta{display:grid;gap:2px;padding-top:6px}
+.wf-meta b{font:600 .98rem var(--f-display);color:var(--brand)}
+.wf-meta span{font-size:.85rem;color:var(--muted);line-height:1.6}
+.wf-n{display:inline-grid;place-items:center;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--brand);color:var(--surface);font:600 .82rem var(--f-display);margin-bottom:4px}
+.box{border:1.5px dashed var(--line-strong);border-radius:12px;padding:16px;background:var(--surface);display:grid;gap:12px;min-width:0}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.logo{font:700 .95rem var(--f-display);color:var(--brand);border:1.5px solid var(--brand);border-radius:8px;padding:2px 10px}
+.mut{color:var(--muted);font-size:.85rem}
+.pill{display:inline-block;padding:6px 16px;border-radius:999px;font-size:.82rem;font-weight:600;white-space:nowrap}
+.pill.fill{background:var(--accent);color:var(--on-accent)}
+.pill.out{border:1.5px solid var(--brand);color:var(--brand)}
+.ph{background:var(--surface-2);border-radius:10px;display:grid;place-items:center;text-align:center;color:var(--muted);font-size:.82rem;padding:10px;min-height:96px;line-height:1.5}
+.ph.tall{min-height:170px}
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:16px;align-items:stretch}
+.hero-t{display:grid;gap:10px;align-content:center}
+.hero-t h5{margin:0;font:700 1.25rem/1.5 var(--f-display);color:var(--fg)}
+.ln{height:9px;border-radius:5px;background:var(--surface-2)}
+.ln.s{width:70%}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+.g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.stat{background:var(--surface-2);border-radius:10px;padding:10px;text-align:center;display:grid;gap:0}
+.stat b{font:700 1.3rem var(--f-display);color:var(--muted)}
+.stat span{font-size:.8rem;color:var(--muted)}
+.tile{background:var(--surface-2);border-radius:10px;padding:12px;font-size:.86rem;font-weight:500;text-align:center;line-height:1.5}
+.step{display:grid;gap:4px;justify-items:center;text-align:center;font-size:.84rem}
+.step i{font-style:normal;display:grid;place-items:center;width:2rem;height:2rem;border-radius:50%;border:1.5px solid var(--brand);color:var(--brand);font:600 .85rem var(--f-display)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chips span{background:var(--surface-2);border-radius:999px;padding:2px 12px;font-size:.84rem;color:var(--muted)}
+.field{border:1.5px solid var(--line);border-radius:8px;padding:6px 12px;font-size:.84rem;color:var(--muted);background:var(--bg)}
+
+/* جدول المقارنة */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.93rem}
+th,td{padding:12px 14px;text-align:start;vertical-align:top;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--f-display);font-weight:600;color:var(--brand);background:var(--surface-2)}
+td.rec{background:var(--good-soft)}
+
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;counter-reset:ph;list-style:none;margin:0;padding:0}
+.flow li{counter-increment:ph;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:4px}
+.flow li::before{content:counter(ph);display:grid;place-items:center;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--brand);color:var(--surface);font:600 .85rem var(--f-display)}
+.flow b{font-family:var(--f-display);color:var(--brand)}
+.flow span{font-size:.9rem;color:var(--muted)}
+
+.next{background:var(--brand);color:var(--surface);border-radius:16px;padding:28px;display:grid;gap:12px;margin-block:36px 56px}
+.next h2{color:var(--surface);font-size:1.5rem}
+.next p,.next li{color:var(--surface)}
+.next ul{margin:0;padding-inline-start:1.3rem;display:grid;gap:6px}
+.copy{font:500 .9rem var(--f-body);cursor:pointer;border:0;border-radius:999px;padding:6px 16px;background:var(--accent);color:var(--on-accent);justify-self:start}
+:root:not([data-theme="light"]) .next{background:var(--brand-soft)}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]) .next{background:var(--brand)}}
+:root[data-theme="dark"] .next{background:var(--brand-soft)}
+:root[data-theme="light"] .next{background:var(--brand)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .next h2,:root:not([data-theme="light"]) .next p,:root:not([data-theme="light"]) .next li{color:var(--fg)}}
+:root[data-theme="dark"] .next h2,:root[data-theme="dark"] .next p,:root[data-theme="dark"] .next li{color:var(--fg)}
+
+@media (max-width:760px){
+  .status,.cols{grid-template-columns:1fr}
+  .swatches{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .wf-row{grid-template-columns:1fr;gap:8px}
+  .wf-meta{padding-top:0}
+  .hero{grid-template-columns:1fr}
+  .g4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .top{padding-block:28px 20px}
+}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+</style>
+
+<div class="root" dir="rtl" lang="ar">
+<nav class="nav" aria-label="أقسام الصفحة"><div class="nav-in">
+  <a href="#info">جمع المعلومات</a>
+  <a href="#templates">القوالب</a>
+  <a href="#direction">الاتجاه البصري</a>
+  <a href="#sitemap">خريطة الموقع</a>
+  <a href="#home">الصفحة الرئيسية</a>
+  <a href="#local">السوق المحلي</a>
+  <a href="#tech">المسار التقني</a>
+  <a href="#phases">المراحل</a>
+  <a href="#next">الخطوة التالية</a>
+</div></nav>
+
+<div class="wrap">
+
+<header class="top">
+  <span class="kicker">مشروع موقع إلكتروني · شركة تدفئة مركزية · سورية</span>
+  <h1>خطة موقع شركة التدفئة المركزية</h1>
+  <p class="lede">ثلاثة أجزاء بحسب طلبك: جمع المعلومات من حسابات الشركة، قوالب للإلهام البصري، وتصور مبدئي لبنية الموقع. هذه مسودة أولى، وتتحدد تفاصيلها بعد أن أعرف الشركة وأرى ذوقك في القوالب.</p>
+  <span class="stamp">مسودة أولى · 15 تشرين الثاني 2026</span>
+</header>
+
+<div class="status">
+  <div class="st"><span class="chip warn">بانتظارك</span><h3>جمع المعلومات والصور والروابط</h3><p>مجلد المشروع فارغ، ولا أعرف اسم الشركة ولا حساباتها. أحتاج الاسم والروابط لأبدأ.</p></div>
+  <div class="st"><span class="chip good">جاهز</span><h3>قوالب للإلهام البصري</h3><p>عاينتُ قالبين بنفسي. الباقي من نتائج البحث وأذكر ذلك بجانب كل قالب.</p></div>
+  <div class="st"><span class="chip brand">مسودة</span><h3>الخطة والتصور المبدئي</h3><p>اتجاه بصري، خريطة موقع، مخطط للصفحة الرئيسية، ومسار تقني مقترح.</p></div>
+</div>
+
+<!-- الجزء الأول -->
+<section class="part" id="info">
+  <div class="part-head">
+    <span class="kicker">الجزء الأول</span>
+    <h2>جمع المعلومات والصور والروابط</h2>
+    <p>هذا الجزء يتوقف على معلومة واحدة منك: اسم الشركة وروابط حساباتها. لم أبحث عن شركة بالتخمين، لأن الخطأ يعني بناء موقع على بيانات شركة أخرى.</p>
+  </div>
+  <div class="cols">
+    <div class="card">
+      <h4>أرسل لي</h4>
+      <ul>
+        <li>اسم الشركة بالعربية، وبالإنجليزية إن وجد.</li>
+        <li>روابط الحسابات: فيسبوك، إنستغرام، تيليغرام، يوتيوب، تيك توك، وأي موقع قديم.</li>
+        <li>رقم واتساب ورقم الهاتف، والعنوان، والمدن التي تخدمها الشركة.</li>
+        <li>الشعار بأعلى جودة متاحة.</li>
+        <li>الخدمات والأنظمة والعلامات التجارية التي تتعامل معها الشركة.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>كيف أجمع المواد بعد ذلك</h4>
+      <ol>
+        <li>أفتح الصفحات العامة في المتصفح المدمج وأقرأ التعريف والخدمات والمنشورات والتعليقات.</li>
+        <li>أرتّب ما وجدته في ملف واحد: نبذة، خدمات، أرقام تواصل، وقائمة بأفضل الصور مع روابطها.</li>
+        <li>فيسبوك وإنستغرام يطلبان تسجيل الدخول لجزء كبير من المحتوى. إن ظهر حاجز، تسجّل أنت الدخول في المتصفح المدمج، أو ترسل لي الصور مباشرة.</li>
+        <li>لا أنزّل أي ملف قبل أن أذكر لك اسمه ومصدره وأسألك.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="soft"><h4>حقوق الصور</h4><p>أفترض أن الصور تخص الشركة التي تطلب الموقع. أخبرني إن كانت أي صورة مأخوذة من جهة أخرى، وسنستبدلها بصورة من أعمال الشركة.</p></div>
+</section>
+
+<!-- الجزء الثاني -->
+<section class="part" id="templates">
+  <div class="part-head">
+    <span class="kicker">الجزء الثاني</span>
+    <h2>قوالب للإلهام البصري</h2>
+    <p>اخترتها لأن بنيتها قريبة من شركة تدفئة: شريط ثقة، خدمات، مشاريع منفّذة، خطوات عمل، مناطق خدمة، وزر اتصال ظاهر. الغرض أن تتصفحها وتحدد ما يعجبك وما لا يعجبك. لا أنصح بشراء قالب منها، والسبب في قسم المسار التقني.</p>
+  </div>
+
+  <div class="sub">
+    <h3>عاينتُها بنفسي</h3>
+    <div class="tpls">
+      <article class="tpl">
+        <div class="tpl-top"><h4><bdi>Coolvia</bdi></h4><span class="tag"><bdi>Webflow</bdi> · تكييف وصيانة</span></div>
+        <p><span class="lbl">ما نأخذه:</span> شريط أرقام وثقة مباشرة بعد الغلاف (نسبة الإصلاح من أول زيارة، زمن وصول الفني)، خمس خدمات واضحة، قسم أعمال منفّذة بنتائج مقاسة، أربع خطوات لزيارة الفني، وقسم مناطق التغطية.</p>
+        <p class="caveat"><span class="lbl">تحفظ:</span> النص إنجليزي والاتجاه من اليسار، فيحتاج عكساً كاملاً. الشعار برتقالي وأسود.</p>
+        <div class="links"><a href="https://coolvia.webflow.io" target="_blank" rel="noopener">المعاينة الحيّة ↗</a><a href="https://webflow.com/templates/html/coolvia-website-template" target="_blank" rel="noopener">صفحة القالب ↗</a></div>
+      </article>
+      <article class="tpl">
+        <div class="tpl-top"><h4><bdi>Airstead</bdi></h4><span class="tag"><bdi>Webflow</bdi> · إنشاءات وخدمات منزلية</span></div>
+        <p><span class="lbl">ما نأخذه:</span> غلاف كبير بصورة فني حقيقي وعنوان ضخم وزرّين، شريط تنقل عائم على شكل حبّة، وثلاث شارات ثقة تحت العنوان مثل «فنيون مرخّصون» و«طوارئ».</p>
+        <p class="caveat"><span class="lbl">تحفظ:</span> المعاينة تعرض خدمات الأسقف، فتخيّل المحتوى تدفئة. أسلوبه داكن وإنجليزي.</p>
+        <div class="links"><a href="https://airstead.webflow.io" target="_blank" rel="noopener">المعاينة الحيّة ↗</a><a href="https://webflow.com/templates/html/airstead-website-template" target="_blank" rel="noopener">صفحة القالب ↗</a></div>
+      </article>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>من نتائج البحث، لم أعاينها بعد</h3>
+    <p>معلوماتها مأخوذة من وصف النتائج. افتحها وقرّر بنفسك.</p>
+    <div class="tpls">
+      <article class="tpl">
+        <div class="tpl-top"><h4>أربعة قوالب تدفئة وتكييف</h4><span class="tag"><bdi>Webflow</bdi></span></div>
+        <p>الأسماء: <bdi>HVACiFlow</bdi> و<bdi>Airflow</bdi> و<bdi>AC Service</bdi> و<bdi>Air FZ</bdi>. تغطي التركيب والصيانة وترقية كفاءة الطاقة.</p>
+        <div class="links"><a href="https://webflow.com/templates/search/hvac-services" target="_blank" rel="noopener">قسم HVAC في Webflow ↗</a></div>
+      </article>
+      <article class="tpl">
+        <div class="tpl-top"><h4><bdi>Cooltech</bdi></h4><span class="tag"><bdi>WordPress</bdi> · <bdi>ThemeForest</bdi></span></div>
+        <p>قالب مخصص للتكييف والتدفئة. المتصفح المدمج عندي أعاد خطأ 403 عند فتحه، فقد يفتح عندك بشكل طبيعي.</p>
+        <div class="links"><a href="https://themeforest.net/item/cooltech-air-conditioning-heating-wordpress-theme/42905313" target="_blank" rel="noopener">صفحة القالب ↗</a></div>
+      </article>
+      <article class="tpl">
+        <div class="tpl-top"><h4><bdi>Homefort</bdi> و<bdi>AirSupply</bdi></h4><span class="tag"><bdi>WordPress</bdi> · <bdi>ThemeForest</bdi></span></div>
+        <p>تذكر نتائج البحث أن لهما دعم الكتابة من اليمين إلى اليسار. تحقق من ذلك على صفحة القالب قبل أن تعتمد عليه.</p>
+        <div class="links"><a href="https://themeforest.net/search/heating" target="_blank" rel="noopener">نتائج «heating» ↗</a></div>
+      </article>
+      <article class="tpl">
+        <div class="tpl-top"><h4><bdi>Plumbit</bdi></h4><span class="tag"><bdi>WordPress</bdi> · سباكة وتدفئة</span></div>
+        <p>موجّه للسباكة وإصلاح التدفئة والتكييف، وتذكر النتائج دعم RTL فيه.</p>
+        <div class="links"><a href="https://themeforest.net/item/plumbit-plumbing-wordpress-theme/23687968" target="_blank" rel="noopener">صفحة القالب ↗</a></div>
+      </article>
+      <article class="tpl">
+        <div class="tpl-top"><h4><bdi>Outumn HVACs</bdi></h4><span class="tag"><bdi>Framer</bdi></span></div>
+        <p>قالب تدفئة وتكييف على منصة Framer. مفيد للمقارنة بين أسلوب Framer وأسلوب Webflow.</p>
+        <div class="links"><a href="https://www.framer.com/marketplace/templates/outumn-hvacs/" target="_blank" rel="noopener">صفحة القالب ↗</a></div>
+      </article>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>معارض ومقالات للمقارنة</h3>
+    <ul class="linklist">
+      <li><a href="https://seahawkmedia.com/design/best-plumbing-and-hvac-websites-examples/" target="_blank" rel="noopener">أفضل مواقع السباكة والتدفئة والتكييف للإلهام ↗</a><span>مواقع حقيقية لشركات، مفيدة لرؤية الألوان والصور في الواقع.</span></li>
+      <li><a href="https://www.webfx.com/blog/home-services/hvac-website-examples/" target="_blank" rel="noopener">37 مثالاً لمواقع HVAC ↗</a><span>تنوع كبير في التخطيطات، وفيه ملاحظات عن الصور والألوان.</span></li>
+      <li><a href="https://id30.com/work-shots/renewabl-heat-pump-website-pages.md" target="_blank" rel="noopener">دراسة حالة لموقع مضخات حرارية ↗</a><span>تشرح كيف يُعرض منتج تقني معقد بتسلسل بصري واضح وخطوات للعميل.</span></li>
+      <li><a href="https://webflow.com/made-in-webflow/website/fire-ice-heating-air" target="_blank" rel="noopener">موقع <bdi>Fire &amp; Ice Heating and Air</bdi> ↗</a><span>موقع حقيقي لشركة تدفئة وسباكة مبني على Webflow.</span></li>
+      <li><a href="https://www.competethemes.com/blog/hvac-wordpress-themes/" target="_blank" rel="noopener">أفضل 7 قوالب ووردبريس لشركات التدفئة والتكييف ↗</a><span>مراجعة مكتوبة بروابط معاينة. فيها روابط تسويقية بحسب ما ذكره الموقع.</span></li>
+    </ul>
+  </div>
+
+  <div class="soft">
+    <h4>ما يتكرر في هذه المواقع</h4>
+    <p>زر طلب عرض سعر أو حجز ظاهر دائماً، صفحة مستقلة لكل خدمة، أرقام ثقة قرب أعلى الصفحة، ذكر مناطق الخدمة، وخط طوارئ. سنأخذ هذه الأفكار ونكيّفها مع الواقع في سورية، حيث يكون واتساب غالباً قناة الطلب الأولى.</p>
+  </div>
+</section>
+
+<!-- الجزء الثالث -->
+<section class="part" id="direction">
+  <div class="part-head">
+    <span class="kicker">الجزء الثالث · الخطة والتصور</span>
+    <h2>الاتجاه البصري المقترح</h2>
+    <p>الفكرة: «دفء موثوق». أزرق بحري هادئ للثقة والجدية التقنية، وبرتقالي اللهب يظهر عند قرارات العميل فقط: اتصل، راسل واتساب، اطلب زيارة. خلفية رمادية باردة بدل الكريمية لتبرز دفء الصور والأزرار.</p>
+  </div>
+  <div class="swatches">
+    <div class="sw"><i style="background:#12334f"></i><div><b>أزرق المراجل</b><small>العناوين والشعار والخلفيات الداكنة</small></div></div>
+    <div class="sw"><i style="background:#c2410c"></i><div><b>برتقالي اللهب</b><small>الأزرار وروابط التواصل فقط</small></div></div>
+    <div class="sw"><i style="background:#f3f6f8"></i><div><b>رمادي بارد</b><small>خلفية الصفحات</small></div></div>
+    <div class="sw"><i style="background:#0f2233"></i><div><b>حبر</b><small>النصوص الأساسية</small></div></div>
+  </div>
+  <div class="cols">
+    <div class="card">
+      <h4>الخطوط</h4>
+      <div class="type-demo"><span class="d">تدفئة مركزية</span><span class="b">عناوين بخط Readex Pro ونص بخط IBM Plex Sans Arabic، وكلاهما من Google Fonts ويدعم العربية جيداً. الأرقام لاتينية (0–9) لأنها الأوضح في أرقام الهاتف والمساحات.</span></div>
+    </div>
+    <div class="card">
+      <h4>الصور والنبرة</h4>
+      <ul>
+        <li>صور حقيقية من مشاريع الشركة: غرف المراجل، المشعات المركّبة، فنيون أثناء العمل. هي أقوى من أي صورة جاهزة.</li>
+        <li>عربية مبسطة ومباشرة، وجمل قصيرة، وأزرار تقول ما سيحدث بالضبط («اطلب زيارة ومعاينة»).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="part" id="sitemap" style="padding-top:28px">
+  <div class="part-head">
+    <h2>خريطة الموقع المقترحة</h2>
+    <p>تتعدل بحسب ما تقدمه الشركة فعلاً. لا أضيف صفحة لخدمة لا تقدمها.</p>
+  </div>
+  <div class="pages">
+    <div class="pg"><em>أساسي</em><b>الرئيسية</b><span>الغلاف، الثقة، الخدمات، المشاريع، طلب عرض سعر.</span></div>
+    <div class="pg"><em>أساسي</em><b>الخدمات</b><span>صفحة لكل خدمة: دراسة وتصميم الشبكة، توريد وتركيب، صيانة وطوارئ، قطع غيار.</span></div>
+    <div class="pg"><em>أساسي</em><b>الأنظمة والمعدات</b><span>المراجل، المشعات، التدفئة الأرضية، المضخات الحرارية والطاقة الشمسية، بحسب ما تبيعه الشركة.</span></div>
+    <div class="pg"><em>أساسي</em><b>المشاريع المنفّذة</b><span>معرض بصور حقيقية، لكل مشروع المدينة والمساحة والنظام المركّب.</span></div>
+    <div class="pg"><em>أساسي</em><b>من نحن</b><span>قصة الشركة، سنوات الخبرة، الفريق، العلامات التجارية.</span></div>
+    <div class="pg"><em>أساسي</em><b>اتصل بنا واطلب زيارة</b><span>واتساب، الهاتف، العنوان، الخريطة، ساعات العمل، نموذج الطلب.</span></div>
+    <div class="pg"><em class="opt">اختياري</em><b>دليل التدفئة</b><span>مقالات قصيرة: كيف تختار المرجل، صيانة ما قبل الشتاء. تفيد في ظهور الموقع في البحث.</span></div>
+    <div class="pg"><em class="opt">اختياري</em><b>الأسئلة الشائعة</b><span>أجوبة عن التكلفة التقريبية، مدة التركيب، الضمان، الوقود.</span></div>
+    <div class="pg"><em class="opt">اختياري</em><b>حاسبة تقديرية</b><span>تقدير أولي لحجم النظام من المساحة. تحتاج معادلات هندسية تعتمدها الشركة.</span></div>
+  </div>
+</section>
+
+<section class="part" id="home" style="padding-top:28px">
+  <div class="part-head">
+    <h2>تصور الصفحة الرئيسية</h2>
+    <p>ترتيب الأقسام من الأعلى إلى الأسفل. النصوص والأرقام تجريبية وتُستبدل ببيانات الشركة الحقيقية.</p>
+  </div>
+  <div class="wf">
+
+    <div class="wf-row"><div class="wf-meta"><span class="wf-n">1</span><b>الشريط العلوي</b><span>يبقى ظاهراً أثناء التمرير.</span></div>
+      <div class="box"><div class="bar"><b class="logo">شعار الشركة</b><span class="mut">الرئيسية · الخدمات · الأنظمة · المشاريع · من نحن</span><span class="pill fill">واتساب</span></div></div></div>
+
+    <div class="wf-row"><div class="wf-meta"><span class="wf-n">2</span><b>الغلاف</b><span>وعد واضح وزرّان وصورة حقيقية.</span></div>
+      <div class="box"><div class="hero">
+        <div class="hero-t"><h5>شتاء دافئ لبيتك ومنشأتك، من التصميم حتى الصيانة</h5><div class="ln"></div><div class="ln s"></div>
+          <div class="btns"><span class="pill fill">اطلب زيارة ومعاينة</span><span class="pill out">راسلنا على واتساب</span></div></div>
+        <div class="ph tall">صورة مشروع حقيقي<br>(غرفة مراجل أو مشعات مركّبة)</div>
+      </div></div></div>
+
+    <div class="wf-row"><div class="wf-meta"><span class="wf-n">3</span><b>شريط الثقة</b><span>أرقام حقيقية من الشركة فقط. إن لم يوجد رقم نحذف الخانة.</span></div>
+      <div class="box"><div class="g4">
+        <div class="stat"><b>00</b><span>سنة خبرة</span></div><div class="stat"><b>00</b><span>مشروع منفّذ</span></div>
+        <div class="stat"><b>00</b><span>مدة الضمان</span></div><div class="stat"><b>24/7</b><span>خدمة الطوارئ</span></div>
+      </div></div></div>
+
+    <div class="wf-row"><div class="wf-meta"><span class="wf-n">4</span><b>الخدمات</b><span>أربع بطاقات، كل واحدة تفتح صفحتها.</span></div>
+      <div class="box"><div class="g4"><div class="tile">دراسة وتصميم الشبكة</div><div class="tile">توريد وتركيب</div><div class="tile">صيانة وطوارئ</div><div class="tile">قطع غيار</div></div></div></div>
+
+    <div class="wf-row"><div class="wf-meta"><span class="wf-n">5</span><b>الأنظمة والمعدات</b><span>بحسب ما تبيعه الشركة.</span></div>
+      <div class="box"><div class="g4"><div class="ph">مراجل</div><div class="ph">مشعات</div><div class="ph">تدفئة أرضية</div><div class="ph">مضخات حرارية وطاقة شمسية</div></div></div></div>
+
+    <div class="wf-row"><div class="wf-meta"><span class="wf-n">6</span><b>مشاريع منفّذة</b><span>ثلاثة مشاريع مختارة مع رابط للمعرض الكامل.</span></div>
+      <div class="box"><div class="g3"><div class="ph tall">صورة مشروع<br><span class="mut">المدينة · المساحة · النظام</span></div><div class="ph tall">صورة مشروع<br><span class="mut">المدينة · المساحة · النظام</span></div><div class="ph tall">صورة مشروع<br><span class="mut">المدينة · المساحة · النظام</span></div></div></div></div>
+
+    <div class="wf-row"><div class="wf-meta"><span class="wf-n">7</span><b>كيف نعمل</b><span>أربع خطوات تطمئن العميل قبل أن يتصل.</span></div>
+      <div class="box"><div class="g4"><div class="step"><i>1</i>معاينة الموقع</div><div class="step"><i>2</i>دراسة وعرض سعر</div><div class="step"><i>3</i>تركيب وتشغيل</div><div class="step"><i>4</i>ضمان وصيانة</div></div></div></div>
+
+    <div class="wf-row"><div class="wf-meta"><span class="wf-n">8</span><b>مناطق الخدمة</b><span>المدن التي تعمل فيها الشركة فعلاً.</span></div>
+      <div class="box"><div class="chips"><span>[المحافظة 1]</span><span>[المحافظة 2]</span><span>[المدينة 3]</span><span>[المدينة 4]</span></div></div></div>
+
+    <div class="wf-row"><div class="wf-meta"><span class="wf-n">9</span><b>من حساباتنا</b><span>أحدث صور الأعمال من صفحات الشركة، وأزرار للمتابعة.</span></div>
+      <div class="box"><div class="g4"><div class="ph">صورة</div><div class="ph">صورة</div><div class="ph">صورة</div><div class="ph">صورة</div></div><div class="btns"><span class="pill out">فيسبوك</span><span class="pill out">إنستغرام</span><span class="pill out">تيليغرام</span></div></div></div>
+
+    <div class="wf-row"><div class="wf-meta"><span class="wf-n">10</span><b>طلب عرض سعر</b><span>نموذج قصير يُرسل الطلب إلى واتساب الشركة، ومعه أسئلة شائعة.</span></div>
+      <div class="box"><div class="g4"><div class="field">الاسم</div><div class="field">رقم الهاتف</div><div class="field">المدينة</div><div class="field">منزل أم منشأة؟</div></div><div class="g4"><div class="field">المساحة التقريبية</div></div><div class="btns"><span class="pill fill">أرسل الطلب عبر واتساب</span></div></div></div>
+
+    <div class="wf-row"><div class="wf-meta"><span class="wf-n">11</span><b>التذييل</b><span>كل وسائل التواصل في مكان واحد.</span></div>
+      <div class="box"><div class="bar"><span class="mut">العنوان · ساعات العمل · أرقام الهاتف</span><span class="mut">روابط الحسابات · الخريطة</span></div></div></div>
+
+  </div>
+</section>
+
+<section class="part" id="local" style="padding-top:28px">
+  <div class="part-head">
+    <h2>اعتبارات خاصة بالسوق السوري</h2>
+    <p>هذه افتراضاتي من معرفتي العامة بالسوق. صحّحها إن كانت لا تنطبق على جمهور شركتك.</p>
+  </div>
+  <div class="cols">
+    <div class="card"><h4>واتساب أولاً</h4><p>زر واتساب ثابت أسفل الشاشة على الهاتف، ورابط مباشر في كل صفحة، لأن كثيراً من العملاء يفضّلون المراسلة على الاتصال.</p></div>
+    <div class="card"><h4>خفيف وسريع</h4><p>صور مضغوطة بصيغة WebP، بلا مكتبات ثقيلة، ليعمل على اتصال بطيء وهاتف قديم. الهدف أن تظهر الصفحة الرئيسية بسرعة حتى على شبكة ضعيفة.</p></div>
+    <div class="card"><h4>بلا أسعار ثابتة</h4><p>أسعار التدفئة تتأثر بسعر الصرف وبأسعار المعدات، فنعرض «اطلب عرض سعر» بدل رقم قد يصبح خاطئاً بعد أسبوع.</p></div>
+    <div class="card"><h4>الدفع والاستضافة</h4><p>بعض خدمات الاستضافة والدفع الأجنبية قد تكون مقيّدة أو صعبة من سورية. أتحقق من كل منصة قبل اعتمادها، وأفضّل حلاً لا يحتاج اشتراكاً دولياً.</p></div>
+    <div class="card"><h4>موسم الطلب</h4><p>يرتفع الطلب قبل الشتاء، فيحمل الموقع قسماً للصيانة قبل الموسم يُفعّل في الخريف ويُخفى بعده.</p></div>
+    <div class="card"><h4>الحسابات تدعم الثقة</h4><p>معرض الأعمال يتغذى من صفحات الشركة على فيسبوك وإنستغرام، فتبقى صور الموقع حديثة دون جهد مضاعف. وننشئ ملفاً للشركة على خرائط Google ليظهر بحسب المدينة.</p></div>
+  </div>
+</section>
+
+<section class="part" id="tech" style="padding-top:28px">
+  <div class="part-head">
+    <h2>المسار التقني</h2>
+    <p>أرشّح بناء موقع مخصص بدل شراء قالب. القوالب أعلاه مرجع بصري فقط.</p>
+  </div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th></th><th>أ. موقع مخصص ثابت (أبنيه لك هنا)</th><th>ب. ووردبريس بقالب مجاني أو مخصص</th><th>ج. شراء قالب جاهز</th></tr></thead>
+    <tbody>
+      <tr><th>التصميم</th><td class="rec">فريد وبالعربية من اليمين إلى اليسار منذ البداية.</td><td>يتبع القالب، وتعديله يستغرق وقتاً.</td><td>نفس القالب يستخدمه آلاف المواقع، وأغلبها إنجليزي الاتجاه.</td></tr>
+      <tr><th>السرعة</th><td class="rec">الأسرع، لا قاعدة بيانات ولا إضافات.</td><td>متوسطة وتتأثر بعدد الإضافات.</td><td>غالباً ثقيل بسبب مكتبات القالب.</td></tr>
+      <tr><th>تعديل المحتوى</th><td>عن طريقي أو بملف محتوى بسيط. مناسب إن كانت التحديثات قليلة.</td><td class="rec">لوحة تحكم تعدّل منها بنفسك.</td><td>لوحة تحكم بحسب المنصة.</td></tr>
+      <tr><th>الصيانة والتكلفة</th><td class="rec">لا تحديثات أمان دورية، وتكلفة استضافة منخفضة.</td><td>تحديثات وأمان مستمرة واستضافة تدعم PHP.</td><td>ثمن القالب، وقد يصعب الدفع من سورية.</td></tr>
+    </tbody></table></div>
+  <div class="soft"><h4>توصيتي</h4><p>الخيار أ إن كانت الشركة ستضيف مشروعاً أو خبراً مرة في الشهر تقريباً. الخيار ب إن أردتم فريقاً يحدّث الموقع يومياً من لوحة تحكم. أخبرني من سيحدّث المحتوى لنحسم ذلك.</p></div>
+</section>
+
+<section class="part" id="phases" style="padding-top:28px">
+  <div class="part-head"><h2>مراحل العمل</h2></div>
+  <ol class="flow">
+    <li><b>جمع المواد</b><span>اسم الشركة، الحسابات، الصور، النصوص.</span></li>
+    <li><b>اختيار الاتجاه</b><span>تحدد القوالب التي أعجبتك وما أعجبك فيها.</span></li>
+    <li><b>نموذج الصفحة الرئيسية</b><span>صفحة قابلة للمعاينة تعدّل عليها قبل بناء الباقي.</span></li>
+    <li><b>بناء بقية الصفحات</b><span>الخدمات، الأنظمة، المشاريع، من نحن، التواصل.</span></li>
+    <li><b>اختبار</b><span>على الهاتف وعلى شبكة بطيئة وبالوضعين الفاتح والداكن.</span></li>
+    <li><b>الإطلاق</b><span>الدومين والاستضافة، ملف خرائط Google، وربط الحسابات.</span></li>
+  </ol>
+</section>
+
+<section class="next" id="next">
+  <h2>الخطوة التالية</h2>
+  <p>أحتاج منك أمرين لأكمل:</p>
+  <ul>
+    <li>اسم الشركة وروابط حساباتها على فيسبوك وإنستغرام وتيليغرام ويوتيوب وتيك توك وأي موقع قديم.</li>
+    <li>قالبان أو ثلاثة أعجبتك من الأعلى، وما الذي أعجبك فيها: الألوان، حجم الصور، البساطة، أو ترتيب الأقسام.</li>
+  </ul>
+  <p>بعدها أجمع المواد وأبني نموذج الصفحة الرئيسية الأول.</p>
+  <button class="copy" id="copyBtn" type="button">انسخ قائمة المطلوب</button>
+</section>
+
+</div>
+</div>
+
+<script>
+document.documentElement.setAttribute('dir','rtl');
+document.documentElement.setAttribute('lang','ar');
+(function(){
+  var btn=document.getElementById('copyBtn');
+  var text='المطلوب لإكمال موقع شركة التدفئة:\n1) اسم الشركة (عربي/إنجليزي)\n2) روابط الحسابات: فيسبوك، إنستغرام، تيليغرام، يوتيوب، تيك توك، أي موقع قديم\n3) رقم واتساب والهاتف والعنوان والمدن\n4) الشعار\n5) الخدمات والأنظمة والعلامات التجارية\n6) قالبان أو ثلاثة أعجبتك وما الذي أعجبك فيها';
+  btn.addEventListener('click',function(){
+    function done(m){btn.textContent=m;setTimeout(function(){btn.textContent='انسخ قائمة المطلوب'},2200)}
+    try{
+      navigator.clipboard.writeText(text).then(function(){done('تم النسخ')},function(){done('تعذّر النسخ، حدّد القائمة يدوياً')});
+    }catch(e){done('تعذّر النسخ، حدّد القائمة يدوياً')}
+  });
+})();
+</script>
